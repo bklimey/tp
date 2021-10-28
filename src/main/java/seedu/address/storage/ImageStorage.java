@@ -4,10 +4,15 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import javafx.scene.image.Image;
+import seedu.address.MainApp;
 
 public class ImageStorage {
 
-    private static final String IMAGE_RESOURCE_PATH = "src/main/resources/images/";
+    private static final String IMAGE_RESOURCE_PATH = "/images/";
+
+    private static Image getImage(String imagePath) {
+        return new Image(MainApp.class.getResourceAsStream(imagePath));
+    }
 
     /**
      * Returns a social platform icon given a platform.
@@ -19,6 +24,8 @@ public class ImageStorage {
         case "ig":
             imageFile = "instagram.png";
             break;
+        case "tl":
+            //Fallthrough
         case "tg":
             imageFile = "telegram.png";
             break;
@@ -51,13 +58,7 @@ public class ImageStorage {
         default:
             return null;
         }
-        try {
-            FileInputStream inputStream = new FileInputStream(IMAGE_RESOURCE_PATH + "social/" + imageFile);
-            return new Image(inputStream);
-        } catch (FileNotFoundException e) {
-            System.out.println("Image file not found for social platform: " + platform);
-        }
-        return null;
+        return getImage(IMAGE_RESOURCE_PATH + "social/" + imageFile);
     }
 
     /**
@@ -76,13 +77,7 @@ public class ImageStorage {
         default:
             return null;
         }
-        try {
-            FileInputStream inputStream = new FileInputStream(IMAGE_RESOURCE_PATH + "gender/" + imageFile);
-            return new Image(inputStream);
-        } catch (FileNotFoundException e) {
-            System.out.println("Image file not found for gender: " + gender);
-        }
-        return null;
+        return getImage(IMAGE_RESOURCE_PATH + "gender/" + imageFile);
     }
 
 }
