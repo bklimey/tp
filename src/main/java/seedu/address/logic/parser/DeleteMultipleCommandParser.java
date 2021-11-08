@@ -154,9 +154,7 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
         if (argMultimap.getValue(PREFIX_SOCIAL_HANDLE).isPresent()
                 && !argMultimap.getValue(PREFIX_SOCIAL_HANDLE).get().trim().isEmpty()) {
             List<String> socialHandleKeywords = argMultimap.getAllValues(PREFIX_SOCIAL_HANDLE);
-            for (String socialHandle : socialHandleKeywords) {
-                ParserUtil.parseName(socialHandle);
-            }
+            ParserUtil.parseSocialHandles(socialHandleKeywords);
             int numOfEmptyValue = (int) socialHandleKeywords.stream()
                     .filter(String::isEmpty).count();
             if (numOfEmptyValue != 0) {
